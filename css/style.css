@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue Cyr Thin";
+  --black-color: #1c1f22;
+  --grey-color: #757778;
+}
+
+html {
+  font-size: 20px;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #1c1f22;
+}
+
+body > header {
+  padding: 1rem;
+}
+
+body > header > nav {
+  padding: 1rem;
+}
+
+body > header > nav > * {
+  color: #fff;
+  margin: auto 1rem;
+  font-family: "Helvetica Neue Cyr Light";
+  background-color: transparent;
+  border: none;
+}
+
+body > header > nav > button {
+  font-size: 1rem;
+}
+
+#logo {
+  font-size: 1.5rem;
+  flex-grow: 1;
+}
+
+#logo:hover {
+  cursor: pointer;
+}
