@@ -20,6 +20,7 @@ const products = [
   {
     id: 3,
     name: "Black T-Shirt",
+    type: "shirt",
     sizes: ["M"],
     color: "black",
     image: "../assets/images/black_shirt.jpg",
@@ -28,6 +29,7 @@ const products = [
   {
     id: 4,
     name: "Black T-Shirt",
+    type: "shirt",
     sizes: ["S", "XXL"],
     color: "black",
     image: "../assets/images/black_shirt_2.jpg",
@@ -36,6 +38,7 @@ const products = [
   {
     id: 5,
     name: "Washed Out Black Jeans",
+    type: "pants",
     sizes: ["S", "M", "L", "XXL"],
     color: "washed",
     image: "../assets/images/washed_pants.jpg",
@@ -44,6 +47,7 @@ const products = [
   {
     id: 6,
     name: "Ripped Grey Jeans",
+    type: "pants",
     sizes: ["S", "XXL"],
     color: "grey",
     image: "../assets/images/ripped_pants.jpg",
@@ -52,6 +56,7 @@ const products = [
   {
     id: 7,
     name: "Blue Pants",
+    type: "pants",
     sizes: ["XXL"],
     color: "blue",
     image: "../assets/images/blue_pants.jpg",
@@ -60,6 +65,7 @@ const products = [
   {
     id: 8,
     name: "Black Pants",
+    type: "pants",
     sizes: ["S", "M"],
     color: "black",
     image: "../assets/images/black_pants.jpg",
