@@ -8,7 +8,7 @@ const generateShop = () => {
     //Iterates through the products object and creates the html string for each product containing the html code for that product and ADDS it to the shopHTML string
     let productHTML = `
     <div
-    class="col-md-4 d-flex align-items-center justify-content-center"
+    class="col-md-4 d-flex align-items-center justify-content-center product"
     data-product-id="${product.id}"
     data-category="any ${product.type}"
     data-color="any ${product.color}"
@@ -40,4 +40,29 @@ const generateShop = () => {
   });
 
   shopEl.innerHTML = shopHTML; //Finally it replaces the html code of the shop container with the shopHTML string
+};
+
+// FUNCTION THAT FILTERS THE SHOP
+const filterShop = () => {
+  let category = document.querySelector("#category-selector").value; //Selected category
+  let size = document.querySelector("#size-selector").value; //Selected size
+  let color = document.querySelector("#color-selector").value; //Selected color
+
+  let itemsEl = document.querySelectorAll(".product"); //All shop item elements
+
+  itemsEl.forEach((itemEl) => { //Iterating through all of them
+    let itemCategory = itemEl.getAttribute("data-category"); //Item categories
+    let itemSizes = itemEl.getAttribute("data-sizes"); //Item sizes
+    let itemColor = itemEl.getAttribute("data-color"); //Item color
+
+    itemEl.classList.remove("d-none"); //Removing d-none class from each element
+
+    if (
+      !itemCategory.includes(category) ||
+      !itemSizes.includes(size) ||
+      !itemColor.includes(color)
+    ) { //Checking if element doesn't have one of the selected filters
+      itemEl.classList.add("d-none"); //Adding it the d-none class if true
+    }
+  });
 };
