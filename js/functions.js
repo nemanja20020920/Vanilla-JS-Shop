@@ -4,13 +4,15 @@ const generateShop = () => {
 
   let shopHTML = ""; //Creates the html string that will contain html code for the store
 
-  products.forEach((product) => { //Iterates through the products object and creates the html string for each product containing the html code for that product and ADDS it to the shopHTML string
+  products.forEach((product) => {
+    //Iterates through the products object and creates the html string for each product containing the html code for that product and ADDS it to the shopHTML string
     let productHTML = `
     <div
     class="col-md-4 d-flex align-items-center justify-content-center"
     data-product-id="${product.id}"
-    data-color="${product.color}"
-    data-sizes="${product.sizes}"
+    data-category="any ${product.type}"
+    data-color="any ${product.color}"
+    data-sizes="any ${product.sizes}"
     data-price="${product.price}"
   >
     <div class="item-wrapper p-0 my-3">
