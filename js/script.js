@@ -1,0 +1,1 @@
+setTimeout(generateShop, 200);
