@@ -35,7 +35,10 @@
             <span id="cart-count" class="text-center p-0">3</span>
           </div>
         </div>
-        <button type="button" class="text-uppercase">login / register</button>
+        <button type="button" class="text-uppercase">login</button>
+        <button type="button" class="text-uppercase" id="open-register">
+          register
+        </button>
       </nav>
     </header>
 
@@ -51,7 +54,12 @@
               id="category-selector"
               class="filters text-uppercase"
             >
-              <option value="any" selected disabled class="filters text-uppercase">
+              <option
+                value="any"
+                selected
+                disabled
+                class="filters text-uppercase"
+              >
                 Category
               </option>
               <option value="any" class="filters text-uppercase">Any</option>
@@ -71,7 +79,12 @@
               id="size-selector"
               class="filters text-uppercase"
             >
-              <option value="any" selected disabled class="filters text-uppercase">
+              <option
+                value="any"
+                selected
+                disabled
+                class="filters text-uppercase"
+              >
                 Size
               </option>
               <option value="any" class="filters text-uppercase">Any</option>
@@ -92,7 +105,12 @@
               id="color-selector"
               class="filters text-uppercase"
             >
-              <option value="any" selected disabled class="filters text-uppercase">
+              <option
+                value="any"
+                selected
+                disabled
+                class="filters text-uppercase"
+              >
                 Color
               </option>
               <option value="any" class="filters text-uppercase">Any</option>
@@ -122,6 +140,51 @@
         </div>
       </div>
     </section>
+
+    <div
+      class="container register-form-wrapper d-flex flex-column align-items-center justify-content-center d-none"
+    >
+      <header>
+        <h1 class="register-header py-3 mt-2">Register form</h1>
+      </header>
+      <form id="register-form">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="register-email"
+            placeholder="name@example.com"
+          />
+          <label for="register-email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="register-password"
+            placeholder="Password"
+          />
+          <label for="register-password">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="repeat-register-password"
+            placeholder="Password"
+          />
+          <label for="repeat-register-password">Repeat Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary register-btn">
+          Register
+        </button>
+        <button type="button" class="close-btn">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </form>
+    </div>
+
+    <div class="overlay d-none"></div>
 
     <script src="js/products.js"></script>
     <script src="js/functions.js"></script>
