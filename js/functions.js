@@ -50,7 +50,8 @@ const filterShop = () => {
 
   let itemsEl = document.querySelectorAll(".product"); //All shop item elements
 
-  itemsEl.forEach((itemEl) => { //Iterating through all of them
+  itemsEl.forEach((itemEl) => {
+    //Iterating through all of them
     let itemCategory = itemEl.getAttribute("data-category"); //Item categories
     let itemSizes = itemEl.getAttribute("data-sizes"); //Item sizes
     let itemColor = itemEl.getAttribute("data-color"); //Item color
@@ -61,8 +62,23 @@ const filterShop = () => {
       !itemCategory.includes(category) ||
       !itemSizes.includes(size) ||
       !itemColor.includes(color)
-    ) { //Checking if element doesn't have one of the selected filters
+    ) {
+      //Checking if element doesn't have one of the selected filters
       itemEl.classList.add("d-none"); //Adding it the d-none class if true
     }
   });
+};
+
+//FUNCTION THAT REGISTERS A NEW USER
+const register = () => {
+  let email = document.querySelector("#register-email").value;
+  let password = document.querySelector("#register-password").value;
+
+  if (email && password) {
+    //Checks if user entered email and password WILL ADD VALIDATION LATER
+    let user = new User(); //Creates a new user object
+    user.email = email; //Sets values
+    user.password = password;
+    user.registerUser(); //Calls registerUser method which registers the new user
+  }
 };
