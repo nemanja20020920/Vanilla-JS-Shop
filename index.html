@@ -35,7 +35,9 @@
             <span id="cart-count" class="text-center p-0">3</span>
           </div>
         </div>
-        <button type="button" class="text-uppercase">login</button>
+        <button type="button" class="text-uppercase" id="open-login">
+          login
+        </button>
         <button type="button" class="text-uppercase" id="open-register">
           register
         </button>
@@ -145,7 +147,7 @@
       class="container register-form-wrapper d-flex flex-column align-items-center justify-content-center d-none"
     >
       <header>
-        <h1 class="register-header py-3 mt-2">Register form</h1>
+        <h1 class="register-header py-3 mt-2">Register</h1>
       </header>
       <form id="register-form">
         <div class="form-floating mb-3">
@@ -184,8 +186,41 @@
       </form>
     </div>
 
+    <div
+      class="container login-form-wrapper d-flex flex-column align-items-center justify-content-center d-none"
+    >
+      <header>
+        <h1 class="login-header py-3 mt-2">Login</h1>
+      </header>
+      <form id="login-form">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="login-email"
+            placeholder="name@example.com"
+          />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="login-password"
+            placeholder="Password"
+          />
+          <label for="login-password">Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary login-btn">Login</button>
+        <button type="button" class="close-btn">
+          <i class="bi bi-x-circle"></i>
+        </button>
+      </form>
+    </div>
+
     <div class="overlay d-none"></div>
 
+    <script src="js/Session.js"></script>
     <script src="js/User.js"></script>
     <script src="js/products.js"></script>
     <script src="js/functions.js"></script>

@@ -82,3 +82,53 @@ const register = () => {
     user.registerUser(); //Calls registerUser method which registers the new user
   }
 };
+
+//FUNCTION THAT LOGS THE USER IN
+const login = async () => {
+  let email = document.querySelector("#login-email").value;
+  let password = document.querySelector("#login-password").value;
+
+  if (email && password) {
+    //Checks if user entered email and password WILL ADD VALIDATION LATER
+    let user = new User(); //Creates new user object
+    user.email = email; //Sets values
+    user.password = password;
+    let userValid = await user.loginUser(); //Calls loginUser method which logs in the new user if valid and returns a boolean value
+
+    if (userValid) {
+      closeLogin();
+    } else {
+      // Warning alert WILL ADD LATER
+    }
+  }
+};
+
+//HELPER FUNCTION WHICH CLOSES THE LOGIN FORM WINDOW AND CLEARS IT
+const closeLoginFormAndClearIt = () => {
+  document.querySelector(".login-form-wrapper").classList.add("d-none");
+  document.querySelector(".overlay").classList.add("d-none");
+  document.querySelector("#login-email").value = null;
+  document.querySelector("#login-password").value = null;
+};
+const closeLogin = closeLoginFormAndClearIt;
+
+//HELPER FUNCTION WHICH OPENS THE LOGIN FORM
+const openLogin = () => {
+  document.querySelector(".login-form-wrapper").classList.remove("d-none");
+  document.querySelector(".overlay").classList.remove("d-none");
+};
+
+//HELPER FUNCTION WHICH CLOSES THE REGISTER FORM WINDOW AND CLEARS IT
+const closeRegisterFormAndClearIt = () => {
+  document.querySelector(".register-form-wrapper").classList.add("d-none");
+  document.querySelector(".overlay").classList.add("d-none");
+  document.querySelector("#register-email").value = null;
+  document.querySelector("#repeat-register-password").value = null;
+};
+const closeRegister = closeRegisterFormAndClearIt;
+
+//HELPER FUNCTION WHICH OPENS THE REGISTER FORM
+const openRegister = () => {
+  document.querySelector(".register-form-wrapper").classList.remove("d-none");
+  document.querySelector(".overlay").classList.remove("d-none");
+};

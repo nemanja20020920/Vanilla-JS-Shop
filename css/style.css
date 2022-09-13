@@ -158,7 +158,8 @@ button.bi {
 
 /* Register form styles */
 
-.register-form-wrapper {
+.register-form-wrapper,
+.login-form-wrapper {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -170,21 +171,26 @@ button.bi {
   border-radius: 0.5rem;
 }
 
-.register-header {
+.register-header,
+.login-header {
   color: var(--black-color);
   font-family: "Helvetica Neue Cyr Roman";
 }
 
-#register-form {
+#register-form,
+#login-form {
   width: 50%;
 }
 
 #register-form > div > label,
-#register-form > div > input {
+#register-form > div > input,
+#login-form > div > label,
+#login-form > div > input {
   font-family: "Helvetica Neue Cyr Roman";
 }
 
-.register-btn {
+.register-btn,
+.login-btn {
   width: 100%;
   font-family: "Helvetica Neue Cyr Roman";
 }
