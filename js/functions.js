@@ -6,6 +6,11 @@ const generateShop = () => {
 
   products.forEach((product) => {
     //Iterates through the products object and creates the html string for each product containing the html code for that product and ADDS it to the shopHTML string
+
+    let dNoneCLass = "d-none"; //Setting the d-none hmtl to inital value
+
+    if (localStorage.getItem(`${product.id}`)) dNoneCLass = ""; //If this product is in cart then it needs to be displayed so we set the d-none html to ''
+
     let productHTML = `
     <div
     class="col-md-4 d-flex align-items-center justify-content-center product"
@@ -25,10 +30,10 @@ const generateShop = () => {
           <i class="bi bi-dash-lg"></i>
           <span class="price">${product.price}$</span>
         </div>
-        <div class="item-action-btn ms-2 d-none">
-          <button class="bi bi-plus-lg"></button>
+        <div class="item-action-btn ms-2 remove-btn ${dNoneCLass}" onclick="removeFromCart(this)">
+          <button class="bi bi-dash-lg"></button>
         </div>
-        <div class="item-action-btn ms-2">
+        <div class="item-action-btn ms-2 add-btn" onclick="addToCart(this)">
           <button class="bi bi-plus-lg"></button>
         </div>
       </div>
@@ -39,7 +44,15 @@ const generateShop = () => {
     shopHTML += productHTML;
   });
 
-  shopEl.innerHTML = shopHTML; //Finally it replaces the html code of the shop container with the shopHTML string
+  shopEl.innerHTML = shopHTML; //Then it replaces the html code of the shop container with the shopHTML string
+
+  let cartCount = localStorage.getItem("cart_count"); //We select the cartCount from localStorage
+
+  if (cartCount) {
+    //If there are items in cart we remove the d-none class from the count wrapper and set the count span inner text to cartCount value
+    document.querySelector(".count-wrapper").classList.remove("d-none");
+    document.querySelector("#cart-count").innerText = cartCount;
+  }
 };
 
 // FUNCTION THAT FILTERS THE SHOP
@@ -100,6 +113,71 @@ const login = async () => {
     } else {
       // Warning alert WILL ADD LATER
     }
+  }
+};
+
+//FUNCTION THAT ADDS SELECTED ITEM TO CART
+const addToCart = (btn) => {
+  let productWrapper = btn.closest(".product"); //Selecting all the needed elements and values
+  let productId = productWrapper.getAttribute("data-product-id");
+  let cartCount = localStorage.getItem("cart_count");
+  let itemQuantity = localStorage.getItem(`${productId}`);
+
+  if (itemQuantity === null) {
+    //Checking if itemQuantity is null so it means it still isn't added to the cart
+    itemQuantity = 1; //Setting it to 1
+
+    let removeBtn = productWrapper.querySelector(".remove-btn");
+    removeBtn.classList.remove("d-none"); //Displaying the remove button now that itemQuantity is greater than 0
+  } else {
+    //If not then we just increase the itemQuantity
+    itemQuantity = parseInt(itemQuantity);
+    itemQuantity++;
+  }
+
+  if (cartCount === null) {
+    //Checking if the cartCount is null so it means that there is still no items in the cart
+    cartCount = 1; //Setting it to 1
+    document.querySelector(".count-wrapper").classList.remove("d-none"); //Displaying the count wrapper
+  } else {
+    //If not then we just increase the cartCount
+    cartCount = parseInt(cartCount);
+    cartCount++;
+  }
+  document.querySelector("#cart-count").innerText = cartCount; //Setting the cartCount element to its value
+
+  localStorage.setItem(`${productId}`, itemQuantity); //Saving data in localStorage so it's not lost when user refreshes the page
+  localStorage.setItem("cart_count", cartCount);
+};
+
+//FUNCTION THAT REMOVES SELECTED ITEM FROM CART
+const removeFromCart = (btn) => {
+  let productWrapper = btn.closest(".product"); //Selecting all the needed elements and values
+  let productId = productWrapper.getAttribute("data-product-id");
+  let cartCount = localStorage.getItem("cart_count");
+  let itemQuantity = localStorage.getItem(`${productId}`);
+
+  cartCount--; //Decreasing the cartCount and selected item quantity
+  itemQuantity--;
+
+  if (itemQuantity == 0) {
+    //If itemQuantity is 0 we hide the minus button because this item is not in the cart anymore so we can only add it, and we remove it from the localStorage
+    btn.classList.add("d-none");
+    localStorage.removeItem(`${productId}`);
+  } else {
+    //If not we store the new value in the localStorage
+    localStorage.setItem(`${productId}`, itemQuantity);
+  }
+
+  if (cartCount == 0) {
+    //We check if cartCount is 0 which means there are no more items of any kind in the cart
+    document.querySelector("#cart-count").innerText = 0; //Setting the cart count span inner text to 0
+    document.querySelector(".count-wrapper").classList.add("d-none"); //Hiding the count wrapper element
+    localStorage.clear(); //Clearing the localStorage since there are no more items to store
+  } else {
+    //If not we set the inner text of the cart count span to cartCount and store the value in the localStorage
+    document.querySelector("#cart-count").innerText = cartCount;
+    localStorage.setItem("cart_count", cartCount);
   }
 };
 
