@@ -21,12 +21,15 @@ document
   .querySelector("#open-login")
   .addEventListener("click", () => openLogin());
 
-//Event listener that triggers when overlay is clicked WORKS FOR BOTH FORMS
+//Event listener that triggers when overlay is clicked WORKS FOR ALL FORMS INCLUDING THE CART
 document.querySelector(".overlay").addEventListener("click", () => {
   let register = document.querySelector(".register-form-wrapper").classList;
+  let cart = document.querySelector(".cart-container").classList;
 
-  if (register.contains("d-none")) closeLogin();
-  else closeRegister();
+  if (register.contains("d-none")) {
+    if (cart.contains("d-none")) closeLogin();
+    else closeCart();
+  } else closeRegister();
 });
 
 //Event listeners for close buttons of each form WORKS FOR BOTH FORMS
@@ -49,4 +52,14 @@ document.querySelector("#register-form").addEventListener("submit", (e) => {
 document.querySelector("#login-form").addEventListener("submit", (e) => {
   e.preventDefault();
   login();
+});
+
+document.querySelector(".cart-btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  generateCart();
+});
+
+document.querySelector("#order-btn").addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("Order placed!");
 });

@@ -111,7 +111,7 @@ const login = async () => {
     if (userValid) {
       closeLogin();
     } else {
-      // Warning alert WILL ADD LATER
+      // Error
     }
   }
 };
@@ -181,6 +181,65 @@ const removeFromCart = (btn) => {
   }
 };
 
+//FUNCTION WHICH GENERATES THE CART
+const generateCart = () => {
+  let cartCount = localStorage.getItem("cart_count"); //Takes the amount of items in cart
+
+  if (cartCount != null) {
+    //If not empty then the cart is generated
+    let productIds = []; //Creates the array in which product ids will be stored
+    products.forEach((product) => productIds.push(product.id));
+
+    let cartHTML = ""; //Creates the cartHTMl string which will contain the html code for the cart
+    let totalPrice = 0; //Creates the total price variable which will hold the value for total price of the items in cart
+
+    for (let key in localStorage) {
+    //Iterates through the localStorage object
+      if (productIds.includes(parseInt(key))) {
+        //If localStorage contains the id of a product that means that product is in cart
+        let product = products.filter((product) => product.id == key); //So we take that product
+        product = {
+          //And make it an object because it Array.filter() function made it an array
+          ...product[0],
+        };
+
+        let itemHTML = `
+        <li class="cart-item">
+          <div class="col-md-2 col-sm-3 col-2">
+            <div class="item-image" style="background-image: url(${
+              product.image
+            })" >
+              <span id="number">${localStorage.getItem(`${key}`)}</span>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-3 col-2 text-nowrap">
+            <span class="item-name">${product.name}</span>
+          </div>
+          <div class="col-md-2 col-sm-3 col-2 d-flex align-items-center justify-content-end">
+            <span class="item-price">${product.price.toFixed(2)}$</span>
+          </div>
+        </li>
+        `; //We create the HTML string for that item
+
+        cartHTML += itemHTML; //And than add it to cartHTML string
+        totalPrice +=
+          parseInt(product.price) * parseInt(localStorage.getItem(`${key}`)); //Finally we add the price of that item multiplied by the quantity of it in cart to the total price
+      }
+
+      document.querySelector("#cart-list").innerHTML = cartHTML; //Then we add the html code to cart list element
+      document.querySelector("#total").innerText = `Total: ${totalPrice.toFixed(
+        2
+      )}$`; //And change the total price also
+    }
+
+    openCart(); //Finally we call the openCart helper function which displays the cart window
+  } else {
+    //If empty the error is displayed
+
+    //Error WILL ADD LATER
+  }
+};
+
 //HELPER FUNCTION WHICH CLOSES THE LOGIN FORM WINDOW AND CLEARS IT
 const closeLoginFormAndClearIt = () => {
   document.querySelector(".login-form-wrapper").classList.add("d-none");
@@ -209,4 +268,16 @@ const closeRegister = closeRegisterFormAndClearIt;
 const openRegister = () => {
   document.querySelector(".register-form-wrapper").classList.remove("d-none");
   document.querySelector(".overlay").classList.remove("d-none");
+};
+
+//HELPER FUNCTION WHICH OPENS THE CART
+const openCart = () => {
+  document.querySelector(".cart-container").classList.remove("d-none");
+  document.querySelector(".overlay").classList.remove("d-none");
+};
+
+//HELPER FUNCTION WHICH CLOSES THE CART
+const closeCart = () => {
+  document.querySelector(".cart-container").classList.add("d-none");
+  document.querySelector(".overlay").classList.add("d-none");
 };
