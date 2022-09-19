@@ -218,6 +218,37 @@
       </form>
     </div>
 
+    <div class="container cart-container py-5 px-3 d-none">
+      <div class="row cart-header my-4">
+        <div class="col-12">
+          <h1 class="text-center">Cart</h1>
+        </div>
+      </div>
+
+      <div class="row cart-body my-4">
+        <div class="col-md-3 col-1"></div>
+        <ul id="cart-list"></ul>
+        <div class="col-md-3 col-1"></div>
+      </div>
+
+      <div class="row cart-footer my-4">
+        <div class="col-5"></div>
+        <div class="col-2 d-flex align-items-end justify-content-center">
+          <button type="button" class="text-nowrap" id="order-btn">
+            Place order
+          </button>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-end">
+          <span id="total">Total: 0,00$</span>
+        </div>
+        <div class="col-3"></div>
+      </div>
+
+      <button type="button" class="close-btn">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+
     <div class="overlay d-none"></div>
 
     <script src="js/Session.js"></script>

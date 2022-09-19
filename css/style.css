@@ -217,3 +217,98 @@ button.bi {
   outline: none;
   font-size: 1.5rem;
 }
+
+/* CART */
+
+.cart-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  color: var(--black-color);
+  z-index: 2;
+}
+
+#cart-list {
+  max-height: 20rem;
+  overflow: auto;
+  width: 50%;
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+#cart-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#cart-list::-webkit-scrollbar-button {
+  display: none;
+}
+
+#cart-list::-webkit-scrollbar-thumb {
+  background-color: var(--black-color);
+}
+
+.cart-item {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.item-image {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.1rem;
+  z-index: 2;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 110%;
+  transform: translate(-100%, -100%);
+  background-color: #fff;
+  z-index: 3;
+  color: var(--black-color);
+  font-size: 0.5rem;
+  border: 0.5px solid var(--black-color);
+  border-radius: 50%;
+  font-family: "Helvetica Neue Cyr Roman";
+}
+
+.item-name {
+  font-family: "Helvetica Neue Cyr Roman";
+}
+
+.item-price {
+  font-family: "Helvetica Neue Cyr Roman";
+  color: #000;
+}
+
+#order-btn {
+  border: none;
+  text-align: center;
+  padding: 0.5rem 5rem;
+  color: #fff;
+  background-color: var(--black-color);
+  cursor: pointer;
+  font-family: "Helvetica Neue Cyr Roman";
+}
+
+#total {
+  text-align: right;
+  font-family: "Helvetica Neue Cyr Roman";
+}
