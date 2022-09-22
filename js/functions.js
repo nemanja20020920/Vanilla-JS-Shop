@@ -93,6 +93,17 @@ const register = () => {
     user.email = email; //Sets values
     user.password = password;
     user.registerUser(); //Calls registerUser method which registers the new user
+
+    openDialog(
+      "Register succesfull!",
+      `You have registered succesfully as ${user.email}.`
+    );
+  } else {
+    //If not we display the error
+    openDialog(
+      "Empty form!",
+      "The form is empty, please enter the data and try again."
+    );
   }
 };
 
@@ -110,9 +121,16 @@ const login = async () => {
 
     if (userValid) {
       closeLogin();
+      openDialog("Login succesfull!", `You are now logged in as ${user.email}.`);
     } else {
-      // Error
+      openDialog("Invalid data!", "Check your data and then try again.");
     }
+  } else {
+    //If not then w display the error
+    openDialog(
+      "Empty form!",
+      "The form is empty, please enter the data and try again."
+    );
   }
 };
 
@@ -235,7 +253,13 @@ const generateCart = () => {
     openCart(); //Finally we call the openCart helper function which displays the cart window
   } else {
     //If empty the error is displayed
-    //Error WILL ADD LATER
+    if (window.innerWidth < 576) {
+      toggleMenu();
+    }
+    openDialog(
+      "Empty cart!",
+      "Your cart is empty, add some items to it and try again!"
+    );
   }
 };
 
@@ -302,4 +326,57 @@ const toggleMenu = () => {
   middleBar.classList.toggle("swipe-middle-animation");
   bottomBar.classList.toggle("rotate-bottom-animation");
   menu.classList.toggle("menu-open");
+};
+
+//HELPER FUNCTION THAT OPENS A DIALOG BOX
+const openDialog = (
+  headerText = "Oops, an error occured!",
+  paragraphText = "There has been an error, check everything and try again."
+) => {
+  let dialogBox = document.querySelector(".message-box");
+  let dialogBtn = dialogBox.querySelector("#message-box-btn");
+  let overlay = document.querySelector(".dialog-overlay");
+  let header = dialogBox.querySelector("h2");
+  let paragraph = dialogBox.querySelector("p");
+
+  header.innerText = headerText;
+  paragraph.innerText = paragraphText;
+
+  overlay.classList.remove("d-none");
+  dialogBox.classList.add("fade-in");
+  dialogBox.classList.add("d-flex");
+
+  dialogBtn.addEventListener(
+    "click",
+    (e) => {
+      e.preventDefault();
+
+      closeDialog();
+    },
+    { once: true }
+  );
+
+  document
+    .querySelector(".dialog-overlay")
+    .addEventListener("click", () => closeDialog(), { once: true });
+};
+
+//HELPER FUNCTION WHICH CLOSES THE DIALOG
+const closeDialog = () => {
+  let dialogBox = document.querySelector(".message-box");
+  let overlay = document.querySelector(".dialog-overlay");
+
+  dialogBox.classList.remove("fade-in");
+  dialogBox.offsetWidth;
+  dialogBox.classList.add("fade-in-reverse");
+
+  dialogBox.addEventListener(
+    "animationend",
+    () => {
+      dialogBox.classList.remove("d-flex");
+      overlay.classList.add("d-none");
+      dialogBox.classList.remove("fade-in-reverse");
+    },
+    { once: true }
+  );
 };
