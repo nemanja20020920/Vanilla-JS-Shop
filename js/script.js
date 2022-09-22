@@ -61,5 +61,12 @@ document.querySelector(".cart-btn").addEventListener("click", (e) => {
 
 document.querySelector("#order-btn").addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("Order placed!");
+  console.log("Order placed!"); //WILL FINISH LATER
 });
+
+document
+  .querySelector(".responsive-menu-btn")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleMenu();
+  });

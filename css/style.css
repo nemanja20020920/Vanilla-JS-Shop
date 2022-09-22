@@ -18,10 +18,11 @@ body {
 }
 
 body > header {
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
 body > header > nav {
+  display: flex;
   padding: 1rem;
 }
 
@@ -40,6 +41,9 @@ body > header > nav > button {
 #logo {
   font-size: 1.5rem;
   flex-grow: 1;
+  font-family: "Helvetica Neue Cyr Light";
+  color: #fff;
+  padding: 1rem;
 }
 
 #logo:hover {
@@ -90,8 +94,9 @@ section#shop > header {
   cursor: pointer;
   background-color: #fff;
   color: var(--black-color);
-  width: 2rem;
-  height: 2rem;
+  padding: 0.5rem;
+  /* width: 2rem;
+  height: 2rem; */
   border: none;
   border-radius: 50%;
   text-align: center;
@@ -168,13 +173,12 @@ button.bi {
   height: 80%;
   background-color: #fff;
   z-index: 2;
-  border-radius: 0.5rem;
 }
 
 .register-header,
 .login-header {
   color: var(--black-color);
-  font-family: "Helvetica Neue Cyr Roman";
+  font-family: "Helvetica Neue Cyr Thin";
 }
 
 #register-form,
@@ -193,6 +197,10 @@ button.bi {
 .login-btn {
   width: 100%;
   font-family: "Helvetica Neue Cyr Roman";
+  background-color: var(--black-color);
+  color: #fff;
+  padding: 0.5rem 0rem;
+  border: none;
 }
 
 .overlay {
@@ -311,4 +319,60 @@ button.bi {
 #total {
   text-align: right;
   font-family: "Helvetica Neue Cyr Roman";
+}
+
+.cart-container > .close-btn {
+  top: 15%;
+  left: 90%;
+}
+
+.responsive-menu-btn {
+  position: relative !important;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 1.5rem;
+  height: 1rem;
+  display: none;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar {
+  position: absolute;
+  left: 50%;
+  padding: 1px;
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
+  transform: rotate(0deg) translate(-50%, -50%);
+}
+
+.top-bar {
+  top: 0%;
+}
+
+.middle-bar {
+  top: 50%;
+}
+
+.bottom-bar {
+  top: 100%;
+}
+
+.rotate-top-animation {
+  top: 50%;
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.swipe-middle-animation {
+  transform: translateX(-100%);
+}
+
+.rotate-bottom-animation {
+  top: 50%;
+  left: 0;
+  transform: rotate(-45deg);
 }

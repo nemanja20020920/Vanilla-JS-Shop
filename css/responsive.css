@@ -1,0 +1,105 @@
+* {
+  --black-color: #1c1f22;
+  --grey-color: #757778;
+}
+
+@media only screen and (max-width: 1199px) {
+  #cart-list {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  #register-form,
+  #login-form {
+    width: 60%;
+  }
+
+  #cart-list {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filters {
+    margin: 0.5rem;
+    width: 90%;
+  }
+
+  #register-form,
+  #login-form {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .cart-footer {
+    padding: 0 1rem;
+  }
+
+  #order-btn {
+    padding: 0.5rem 2rem;
+    text-align: center;
+  }
+
+  .responsive-menu-btn {
+    display: flex !important;
+  }
+
+  #navbar {
+    position: absolute;
+    top: calc(85px + 40px);
+    left: 0;
+    transform: scaleY(0);
+    transition: transform 0.2s ease-in-out;
+    transform-origin: top;
+    flex-direction: column !important;
+    background-color: #fff;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  body > header > nav > * {
+    color: var(--black-color) !important;
+  }
+
+  .cart-btn {
+    color: var(--black-color);
+  }
+
+  .menu-open {
+    transform: scaleY(1) !important;
+  }
+
+  .count-wrapper {
+    background-color: var(--grey-color);
+  }
+
+  #cart-count {
+    color: #fff;
+  }
+
+  #cart-list {
+    width: 100%;
+  }
+
+  .cart-container > .cart-body > div:first-child,
+  .cart-container > .cart-body > div:last-child {
+    display: none;
+  }
+
+  .cart-container > .close-btn {
+    left: 80%;
+    top: 20%;
+  }
+
+  .close-btn {
+    top: 15%;
+    left: 80%;
+  }
+
+  .register-form-wrapper,
+  .login-form-wrapper {
+    width: 100%;
+  }
+}

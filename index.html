@@ -18,30 +18,36 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
     <title>Web Shop</title>
   </head>
 
   <body>
-    <header>
-      <nav class="d-flex align-items-center justify-content-center">
-        <span id="logo" class="text-uppercase">nstore</span>
+    <header class="d-flex align-items-center justify-content-center">
+      <span id="logo" class="text-uppercase">nstore</span>
+      <nav class="align-items-center justify-content-center" id="navbar">
         <div
           class="cart-wrapper d-flex align-items-center justify-content-center"
         >
-          <button type="button" class="cart-btn text-uppercase p-0">
+          <button type="button" class="cart-btn text-uppercase p-0 nav-btn">
             Cart
           </button>
           <div class="count-wrapper ms-1 d-none">
             <span id="cart-count" class="text-center p-0">3</span>
           </div>
         </div>
-        <button type="button" class="text-uppercase" id="open-login">
+        <button type="button" class="text-uppercase nav-btn" id="open-login">
           login
         </button>
-        <button type="button" class="text-uppercase" id="open-register">
+        <button type="button" class="text-uppercase nav-btn" id="open-register">
           register
         </button>
       </nav>
+      <button type="button" class="responsive-menu-btn">
+        <span class="top-bar bar"></span>
+        <span class="middle-bar bar"></span>
+        <span class="bottom-bar bar"></span>
+      </button>
     </header>
 
     <section id="shop">
@@ -177,9 +183,7 @@
           />
           <label for="repeat-register-password">Repeat Password</label>
         </div>
-        <button type="submit" class="btn btn-primary register-btn">
-          Register
-        </button>
+        <button type="submit" class="register-btn">Register</button>
         <button type="button" class="close-btn">
           <i class="bi bi-x-circle"></i>
         </button>
@@ -211,7 +215,7 @@
           />
           <label for="login-password">Password</label>
         </div>
-        <button type="submit" class="btn btn-primary login-btn">Login</button>
+        <button type="submit" class="login-btn">Login</button>
         <button type="button" class="close-btn">
           <i class="bi bi-x-circle"></i>
         </button>
@@ -226,22 +230,26 @@
       </div>
 
       <div class="row cart-body my-4">
-        <div class="col-md-3 col-1"></div>
+        <div class="col-xl-2 col-1"></div>
         <ul id="cart-list"></ul>
-        <div class="col-md-3 col-1"></div>
+        <div class="col-xl-2 col-1"></div>
       </div>
 
       <div class="row cart-footer my-4">
-        <div class="col-5"></div>
-        <div class="col-2 d-flex align-items-end justify-content-center">
+        <div class="col-xxl-5 col-lg-4 col-md-3 col-sm-1 col-0"></div>
+        <div
+          class="col-xxl-2 col-lg-3 col-md-4 col-sm-5 col-6 d-flex align-items-end justify-content-center"
+        >
           <button type="button" class="text-nowrap" id="order-btn">
             Place order
           </button>
         </div>
-        <div class="col-2 d-flex align-items-center justify-content-end">
+        <div
+          class="col-xxl-2 col-lg-3 col-md-4 col-sm-5 col-6 d-flex align-items-center justify-content-end"
+        >
           <span id="total">Total: 0,00$</span>
         </div>
-        <div class="col-3"></div>
+        <div class="col-xxl-3 col-lg-2 col-sm-1 col-0"></div>
       </div>
 
       <button type="button" class="close-btn">

@@ -194,7 +194,7 @@ const generateCart = () => {
     let totalPrice = 0; //Creates the total price variable which will hold the value for total price of the items in cart
 
     for (let key in localStorage) {
-    //Iterates through the localStorage object
+      //Iterates through the localStorage object
       if (productIds.includes(parseInt(key))) {
         //If localStorage contains the id of a product that means that product is in cart
         let product = products.filter((product) => product.id == key); //So we take that product
@@ -205,17 +205,17 @@ const generateCart = () => {
 
         let itemHTML = `
         <li class="cart-item">
-          <div class="col-md-2 col-sm-3 col-2">
+          <div class="col-xl-2 col-sm-3 col-3">
             <div class="item-image" style="background-image: url(${
               product.image
             })" >
               <span id="number">${localStorage.getItem(`${key}`)}</span>
             </div>
           </div>
-          <div class="col-md-2 col-sm-3 col-2 text-nowrap">
+          <div class="col-xl-2 col-sm-3 col-3">
             <span class="item-name">${product.name}</span>
           </div>
-          <div class="col-md-2 col-sm-3 col-2 d-flex align-items-center justify-content-end">
+          <div class="col-xl-2 col-sm-3 col-3 d-flex align-items-center justify-content-end">
             <span class="item-price">${product.price.toFixed(2)}$</span>
           </div>
         </li>
@@ -235,7 +235,6 @@ const generateCart = () => {
     openCart(); //Finally we call the openCart helper function which displays the cart window
   } else {
     //If empty the error is displayed
-
     //Error WILL ADD LATER
   }
 };
@@ -251,6 +250,9 @@ const closeLogin = closeLoginFormAndClearIt;
 
 //HELPER FUNCTION WHICH OPENS THE LOGIN FORM
 const openLogin = () => {
+  if (window.innerWidth < 576) {
+    toggleMenu();
+  }
   document.querySelector(".login-form-wrapper").classList.remove("d-none");
   document.querySelector(".overlay").classList.remove("d-none");
 };
@@ -266,12 +268,18 @@ const closeRegister = closeRegisterFormAndClearIt;
 
 //HELPER FUNCTION WHICH OPENS THE REGISTER FORM
 const openRegister = () => {
+  if (window.innerWidth < 576) {
+    toggleMenu();
+  }
   document.querySelector(".register-form-wrapper").classList.remove("d-none");
   document.querySelector(".overlay").classList.remove("d-none");
 };
 
 //HELPER FUNCTION WHICH OPENS THE CART
 const openCart = () => {
+  if (window.innerWidth < 576) {
+    toggleMenu();
+  }
   document.querySelector(".cart-container").classList.remove("d-none");
   document.querySelector(".overlay").classList.remove("d-none");
 };
@@ -280,4 +288,18 @@ const openCart = () => {
 const closeCart = () => {
   document.querySelector(".cart-container").classList.add("d-none");
   document.querySelector(".overlay").classList.add("d-none");
+};
+
+//HELPER FUNCTION WHICH TOGGLES THE RESPONSIVE MENU
+const toggleMenu = () => {
+  let topBar = document.querySelector(".top-bar");
+  let middleBar = document.querySelector(".middle-bar");
+  let bottomBar = document.querySelector(".bottom-bar");
+  let menu = document.querySelector("#navbar");
+
+  topBar.classList.toggle("rotate-top-animation");
+  middleBar.classList.toggle("opacity-0");
+  middleBar.classList.toggle("swipe-middle-animation");
+  bottomBar.classList.toggle("rotate-bottom-animation");
+  menu.classList.toggle("menu-open");
 };
