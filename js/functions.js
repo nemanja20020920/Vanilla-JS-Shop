@@ -83,7 +83,7 @@ const filterShop = () => {
 };
 
 //FUNCTION THAT REGISTERS A NEW USER
-const register = () => {
+const register = async () => {
   let email = document.querySelector("#register-email").value;
   let password = document.querySelector("#register-password").value;
 
@@ -92,12 +92,22 @@ const register = () => {
     let user = new User(); //Creates a new user object
     user.email = email; //Sets values
     user.password = password;
-    user.registerUser(); //Calls registerUser method which registers the new user
 
-    openDialog(
-      "Register succesfull!",
-      `You have registered succesfully as ${user.email}.`
-    );
+    openDialog("", "", true);
+    let userValid = await user.registerUser(); //Calls registerUser method which registers the new user
+    closeDialog(true);
+
+    setTimeout(() => {
+      if (userValid) {
+        openDialog(
+          "Register succesfull!",
+          `You have registered succesfully as ${user.email}.`
+        );
+        closeRegister();
+      } else {
+        openDialog("Email already taken!", `Try again with different email.`);
+      }
+    }, 400);
   } else {
     //If not we display the error
     openDialog(
@@ -117,16 +127,24 @@ const login = async () => {
     let user = new User(); //Creates new user object
     user.email = email; //Sets values
     user.password = password;
-    let userValid = await user.loginUser(); //Calls loginUser method which logs in the new user if valid and returns a boolean value
 
-    if (userValid) {
-      closeLogin();
-      openDialog("Login succesfull!", `You are now logged in as ${user.email}.`);
-    } else {
-      openDialog("Invalid data!", "Check your data and then try again.");
-    }
+    openDialog("", "", true);
+    let userValid = await user.loginUser(); //Calls loginUser method which logs in the new user if valid and returns a boolean value
+    closeDialog(true);
+
+    setTimeout(() => {
+      if (userValid) {
+        closeLogin();
+        openDialog(
+          "Login succesfull!",
+          `You are now logged in as ${user.email}.`
+        );
+      } else {
+        openDialog("Invalid data!", "Check your data and then try again.");
+      }
+    }, 400);
   } else {
-    //If not then w display the error
+    //If not then we display the error message
     openDialog(
       "Empty form!",
       "The form is empty, please enter the data and try again."
@@ -331,7 +349,8 @@ const toggleMenu = () => {
 //HELPER FUNCTION THAT OPENS A DIALOG BOX
 const openDialog = (
   headerText = "An error occured!",
-  paragraphText = "There has been an error, check everything and try again."
+  paragraphText = "There has been an error, check everything and try again.",
+  loader = false
 ) => {
   let dialogBox = document.querySelector(".message-box");
   let dialogBtn = dialogBox.querySelector("#message-box-btn");
@@ -339,30 +358,52 @@ const openDialog = (
   let header = dialogBox.querySelector("h2");
   let paragraph = dialogBox.querySelector("p");
 
-  header.innerText = headerText;
-  paragraph.innerText = paragraphText;
+  if (loader == false) {
+    header.innerText = headerText;
+    paragraph.innerText = paragraphText;
 
-  overlay.classList.remove("d-none");
-  dialogBox.classList.add("fade-in");
-  dialogBox.classList.add("d-flex");
+    overlay.classList.remove("d-none");
+    dialogBox.classList.add("fade-in");
+    dialogBox.classList.add("d-flex");
 
-  dialogBtn.addEventListener(
-    "click",
-    (e) => {
-      e.preventDefault();
+    dialogBtn.addEventListener(
+      "click",
+      (e) => {
+        e.preventDefault();
 
-      closeDialog();
-    },
-    { once: true }
-  );
+        closeDialog();
+      },
+      { once: true }
+    );
 
-  document
-    .querySelector(".dialog-overlay")
-    .addEventListener("click", () => closeDialog(), { once: true });
+    document
+      .querySelector(".dialog-overlay")
+      .addEventListener("click", () => closeDialog(), { once: true });
+  } else {
+    header.innerText = "Loading...";
+    paragraph.remove();
+
+    let footer = dialogBox.querySelector("footer");
+    footer.remove();
+
+    let spinnerElement = document.createElement("div");
+    spinnerElement.classList.add("spinner-border");
+    spinnerElement.setAttribute("role", "status");
+    let spinnerSpan = document.createElement("span");
+    spinnerSpan.classList.add("visually-hidden");
+    spinnerSpan.innerText = "Loading...";
+    spinnerElement.appendChild(spinnerSpan);
+
+    dialogBox.appendChild(spinnerElement);
+
+    overlay.classList.remove("d-none");
+    dialogBox.classList.add("fade-in");
+    dialogBox.classList.add("d-flex");
+  }
 };
 
 //HELPER FUNCTION WHICH CLOSES THE DIALOG
-const closeDialog = () => {
+const closeDialog = (loader = false) => {
   let dialogBox = document.querySelector(".message-box");
   let overlay = document.querySelector(".dialog-overlay");
 
@@ -376,6 +417,28 @@ const closeDialog = () => {
       dialogBox.classList.remove("d-flex");
       overlay.classList.add("d-none");
       dialogBox.classList.remove("fade-in-reverse");
+
+      if (loader === true) {
+        let paragraph = document.createElement("p");
+        paragraph.innerText = `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident,
+        quibusdam, non ab pariatur ullam, rem delectus placeat modi alias rerum
+        quisquam nihil! Nostrum explicabo similique mollitia qui facilis ad
+        fuga!`;
+        dialogBox.appendChild(paragraph);
+
+        let footer = document.createElement("footer");
+
+        let dialogBtn = document.createElement("button");
+        dialogBtn.setAttribute("type", "button");
+        dialogBtn.id = "message-box-btn";
+        dialogBtn.innerText = "Ok";
+        footer.appendChild(dialogBtn);
+
+        dialogBox.appendChild(footer);
+
+        let dialogSpinner = dialogBox.querySelector("div");
+        dialogSpinner.remove();
+      }
     },
     { once: true }
   );

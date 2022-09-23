@@ -3,6 +3,16 @@ setTimeout(generateShop, 200);
 let session = new Session();
 session.userId = session.getSession();
 
+//FILTERS
+let filters = document.querySelectorAll("select");
+
+filters.forEach((filter) => {
+  filter.addEventListener("change", filterShop);
+});
+
+//FORMS
+
+//Register form validation config object
 const registerConfig = {
   "register-email": {
     required: true,
@@ -24,14 +34,6 @@ const registerConfig = {
 
 let validate = new Validation("#register-form", registerConfig);
 
-//FILTERS
-let filters = document.querySelectorAll("select");
-
-filters.forEach((filter) => {
-  filter.addEventListener("change", filterShop);
-});
-
-//FORMS
 //Event listener that triggers when register button is clicked
 document
   .querySelector("#open-register")
@@ -66,7 +68,8 @@ document.querySelectorAll(".close-btn").forEach((btn) => {
 //Event listener that triggers when register form is submited
 document.querySelector("#register-form").addEventListener("submit", (e) => {
   e.preventDefault();
-  register();
+
+  if (validate.validationPassed()) register();
 });
 
 //Event listener that triggers when login form is submited
@@ -88,6 +91,7 @@ document.querySelector("#order-btn").addEventListener("click", (e) => {
   console.log("Order placed!"); //WILL FINISH LATER
 });
 
+//Event listener that triggers when user clicks the responsive menu button
 document
   .querySelector(".responsive-menu-btn")
   .addEventListener("click", (e) => {

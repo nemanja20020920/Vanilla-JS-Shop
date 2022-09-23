@@ -17,7 +17,6 @@ class Validation {
   inputListener() {
     for (let key in this.config) {
       let element = document.querySelector(`${this.form} input#${key}`);
-      console.log(element);
       element.addEventListener("change", this.validate.bind(this));
     }
   }
@@ -102,6 +101,9 @@ class Validation {
         errors = 1;
       }
     }
+
+    this.populateErrors();
+
     if (errors) return false;
     return true;
   }
