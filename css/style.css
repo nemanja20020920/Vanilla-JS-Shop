@@ -467,3 +467,17 @@ dialog.fade-in-reverse {
     opacity: 1;
   }
 }
+
+/* Validation elements */
+
+.error-list {
+  list-style: none;
+  padding: 0;
+}
+
+.error-list-element {
+  padding: 0.1rem;
+  font-size: 0.8rem;
+  color: var(--bs-red);
+  font-family: "Helvetica Neue Cyr Light";
+}

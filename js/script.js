@@ -3,6 +3,27 @@ setTimeout(generateShop, 200);
 let session = new Session();
 session.userId = session.getSession();
 
+const registerConfig = {
+  "register-email": {
+    required: true,
+    email: true,
+  },
+  "register-password": {
+    required: true,
+    minLength: 6,
+    maxLength: 18,
+    matching: "repeat-register-password",
+  },
+  "repeat-register-password": {
+    required: true,
+    minLength: 6,
+    maxLength: 18,
+    matching: "register-password",
+  },
+};
+
+let validate = new Validation("#register-form", registerConfig);
+
 //FILTERS
 let filters = document.querySelectorAll("select");
 
@@ -54,11 +75,14 @@ document.querySelector("#login-form").addEventListener("submit", (e) => {
   login();
 });
 
+//CART
+//Event listener that triggers when user opens the cart
 document.querySelector(".cart-btn").addEventListener("click", (e) => {
   e.preventDefault();
   generateCart();
 });
 
+//Event listener that triggers when user places the order
 document.querySelector("#order-btn").addEventListener("click", (e) => {
   e.preventDefault();
   console.log("Order placed!"); //WILL FINISH LATER

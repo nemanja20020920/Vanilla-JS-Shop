@@ -330,7 +330,7 @@ const toggleMenu = () => {
 
 //HELPER FUNCTION THAT OPENS A DIALOG BOX
 const openDialog = (
-  headerText = "Oops, an error occured!",
+  headerText = "An error occured!",
   paragraphText = "There has been an error, check everything and try again."
 ) => {
   let dialogBox = document.querySelector(".message-box");
