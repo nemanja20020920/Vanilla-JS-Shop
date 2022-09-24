@@ -23,11 +23,11 @@ class Session {
       }
 
       if (cookie[part].indexOf(userId) == 0) {
-        console.log(cookie[part].substring(userId.length, cookie[part].length));
-        return cookie[part].substring(userId.length, cookie[part].length);
+        this.userId = cookie[part].substring(
+          userId.length,
+          cookie[part].length
+        );
       }
     }
-
-    return "";
   }
 }

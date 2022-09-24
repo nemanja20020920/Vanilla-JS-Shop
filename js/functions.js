@@ -52,6 +52,9 @@ const generateShop = () => {
     //If there are items in cart we remove the d-none class from the count wrapper and set the count span inner text to cartCount value
     document.querySelector(".count-wrapper").classList.remove("d-none");
     document.querySelector("#cart-count").innerText = cartCount;
+  } else {
+    if (!document.querySelector(".count-wrapper").classList.contains("d-none"))
+      document.querySelector(".count-wrapper").classList.add("d-none");
   }
 };
 
@@ -88,7 +91,7 @@ const register = async () => {
   let password = document.querySelector("#register-password").value;
 
   if (email && password) {
-    //Checks if user entered email and password WILL ADD VALIDATION LATER
+    //Checks if user entered email and password
     let user = new User(); //Creates a new user object
     user.email = email; //Sets values
     user.password = password;
@@ -123,24 +126,26 @@ const login = async () => {
   let password = document.querySelector("#login-password").value;
 
   if (email && password) {
-    //Checks if user entered email and password WILL ADD VALIDATION LATER
+    //Checks if user entered email and password
     let user = new User(); //Creates new user object
     user.email = email; //Sets values
     user.password = password;
 
-    openDialog("", "", true);
+    openDialog("", "", true); //Opens the loader dialog
     let userValid = await user.loginUser(); //Calls loginUser method which logs in the new user if valid and returns a boolean value
-    closeDialog(true);
+    closeDialog(true); //Closes it
 
     setTimeout(() => {
+      //We need to set a timeout so the animation ends
       if (userValid) {
-        closeLogin();
+        //If the user exists
+        closeLogin(); //We close the login form
         openDialog(
           "Login succesfull!",
           `You are now logged in as ${user.email}.`
-        );
+        ); //And open the dialog to inform the user that he is logged in
       } else {
-        openDialog("Invalid data!", "Check your data and then try again.");
+        openDialog("Invalid data!", "Check your data and then try again."); //If not we open the dialog to inform the user that his data is incorrect
       }
     }, 400);
   } else {
@@ -279,6 +284,57 @@ const generateCart = () => {
       "Your cart is empty, add some items to it and try again!"
     );
   }
+};
+
+//FUNCTION WHICH SENDS THE USER ORDER TO THE SERVER
+const placeOrder = async () => {
+  let session = new Session();
+  session.getSession();
+
+  if (session.userId) {
+    let productIds = products.map((product) => product.id);
+    let cart = [];
+    let totalPrice = 0;
+
+    for (let key in localStorage) {
+      if (productIds.includes(parseInt(key))) {
+        cart.push({
+          id: key,
+          quantity: localStorage[key],
+        });
+
+        let product = products.find((product) => {
+          if (product.id == key) return product.price;
+        });
+
+        totalPrice += parseInt(product.price) * parseInt(localStorage[key]);
+      }
+    }
+
+    let order = new Order();
+    order.userId = session.userId;
+    order.products = cart;
+    order.totalPrice = totalPrice;
+    openDialog("", "", true);
+    if (await order.sendOrder()) {
+      closeDialog(true);
+      setTimeout(() => {
+        localStorage.clear();
+        openDialog(
+          "Order sent!",
+          "Your order is sent and it will be delivered to you in the coming days."
+        );
+        closeCart();
+        generateShop();
+      }, 400);
+    } else {
+      closeDialog(true);
+      setTimeout(() => {
+        openDialog("Something went wrong!", "Please try again later.");
+      });
+    }
+  } else
+    openDialog("Session expired!", "Please login or register and try again.");
 };
 
 //HELPER FUNCTION WHICH CLOSES THE LOGIN FORM WINDOW AND CLEARS IT

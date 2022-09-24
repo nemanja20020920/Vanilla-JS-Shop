@@ -88,7 +88,7 @@ document.querySelector(".cart-btn").addEventListener("click", (e) => {
 //Event listener that triggers when user places the order
 document.querySelector("#order-btn").addEventListener("click", (e) => {
   e.preventDefault();
-  console.log("Order placed!"); //WILL FINISH LATER
+  placeOrder();
 });
 
 //Event listener that triggers when user clicks the responsive menu button

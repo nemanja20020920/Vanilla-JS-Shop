@@ -102,4 +102,8 @@
   .login-form-wrapper {
     width: 100%;
   }
+
+  .message-box {
+    width: 80%;
+  }
 }
