@@ -98,3 +98,32 @@ document
     e.preventDefault();
     toggleMenu();
   });
+
+//Event listener that handles the go to top link
+window.addEventListener("scroll", () => {
+  let goToBtn = document.querySelector(".go-to-wrapper");
+
+  if (window.scrollY > 100) {
+    if (goToBtn.classList.contains("d-none")) {
+      goToBtn.classList.add("slide-in-rotate-animation");
+      goToBtn.classList.remove("d-none");
+      goToBtn.classList.add("d-flex");
+    }
+  } else {
+    if (goToBtn.classList.contains("d-flex")) {
+      goToBtn.classList.remove("slide-in-rotate-animation");
+      goToBtn.offsetWidth;
+      goToBtn.classList.add("slide-in-rotate-animation-reverse");
+
+      goToBtn.addEventListener(
+        "animationend",
+        () => {
+          goToBtn.classList.add("d-none");
+          goToBtn.classList.remove("d-flex");
+          goToBtn.classList.remove("slide-in-rotate-animation-reverse");
+        },
+        { once: true }
+      );
+    }
+  }
+});

@@ -21,6 +21,11 @@
 }
 
 @media only screen and (max-width: 767px) {
+  .go-to-wrapper {
+    bottom: 10%;
+    right: 10%;
+  }
+
   body::-webkit-scrollbar {
     display: none;
   }
