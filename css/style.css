@@ -481,3 +481,26 @@ dialog.fade-in-reverse {
   color: var(--bs-red);
   font-family: "Helvetica Neue Cyr Light";
 }
+
+/* Footer credits */
+
+body > footer {
+  padding: 2rem;
+  background-color: var(--grey-color);
+}
+
+body > footer > span {
+  color: #fff;
+  font-family: "Helvetica Neue Cyr Roman";
+}
+
+body > footer > span > a {
+  color: var(--black-color);
+  text-decoration: underline;
+  font-family: "Helvetica Neue Cyr Roman";
+}
+
+body > footer > span > a:hover {
+  cursor: pointer;
+  color: #fff;
+}

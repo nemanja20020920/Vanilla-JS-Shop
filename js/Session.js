@@ -4,13 +4,11 @@ class Session {
   startSession() {
     let date = new Date();
 
-    date.setTime(date.getTime() + 5000);
+    date.setTime(date.getTime() + 30 * 60 * 1000);
 
     let expires = ";expires=" + date.toUTCString();
 
     document.cookie = "user_id=" + this.userId + expires;
-
-    // 1 * 24 * 60 * 60 * 1000
   }
 
   getSession() {
