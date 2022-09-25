@@ -495,14 +495,14 @@ body > footer > span {
 }
 
 body > footer > span > a {
-  color: var(--black-color);
+  color: #fff;
   text-decoration: underline;
   font-family: "Helvetica Neue Cyr Roman";
 }
 
 body > footer > span > a:hover {
   cursor: pointer;
-  color: #fff;
+  color: var(--black-color);
 }
 
 /* Scrollbar styles */
@@ -551,11 +551,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 .slide-in-rotate-animation {
-  animation: slide-in .8s ease-in-out;
+  animation: slide-in 0.8s ease-in-out;
 }
 
 .slide-in-rotate-animation-reverse {
-  animation: slide-in .8s reverse ease-in-out;
+  animation: slide-in 0.8s reverse ease-in-out;
 }
 
 @keyframes slide-in {

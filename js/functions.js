@@ -21,7 +21,7 @@ const generateShop = () => {
     data-price="${product.price}"
   >
     <div class="item-wrapper p-0 my-3">
-      <img src="${product.image}" />
+      <img src="${product.image}" alt="${product.color} ${product.type}"/>
       <div
         class="price-and-actions-wrapper d-flex align-items-center jusitfy-content-center"
       >
