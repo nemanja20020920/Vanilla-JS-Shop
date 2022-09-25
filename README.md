@@ -1,6 +1,6 @@
 # Web Shop App
 
-This is my web shop application made with Bootstrap and Vanilla js.
+This is my web shop application made with Bootstrap and Vanilla js. This is the [link](https://nstore-web-shop.netlify.app/ "Link to the app").
 
 ## Functionalities
 
